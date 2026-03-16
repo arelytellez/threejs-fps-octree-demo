@@ -1,0 +1,158 @@
+/* Fondo futurista */
+
+body {
+    background: radial-gradient(circle at top, #1a1a2e, #0f0f1a, #000);
+    color: white;
+    font-family: Segoe UI;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* NAVBAR */
+
+.navbar-futurista {
+    background: rgba(0, 0, 0, 0.8);
+    border-bottom: 1px solid #00ffff;
+}
+
+.logo-text {
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #00ffff !important;
+}
+
+
+/* HERO */
+
+.hero-futurista {
+    padding: 120px 20px;
+    text-align: center;
+}
+
+.titulo-neon {
+
+    font-size: 3.2rem;
+    font-weight: bold;
+
+    color: #00ffff;
+
+    text-shadow:
+        0 0 10px #00ffff,
+        0 0 20px #00ffff,
+        0 0 40px #00ffff;
+}
+
+.subtitulo-hero {
+    max-width: 650px;
+    margin: auto;
+    opacity: 0.85;
+    margin-top: 20px;
+}
+
+
+/* BOTON HERO */
+
+.boton-explorar {
+
+    margin-top: 30px;
+
+    padding: 12px 30px;
+
+    background: transparent;
+
+    border: 2px solid #00ffff;
+
+    color: #00ffff;
+
+    border-radius: 30px;
+
+    transition: 0.3s;
+}
+
+.boton-explorar:hover {
+    background: #00ffff;
+    color: black;
+    transform: scale(1.1);
+}
+
+
+/* TARJETA DEMO */
+
+.card-demo {
+
+    background: rgba(255, 255, 255, 0.05);
+
+    border: 1px solid rgba(0, 255, 255, 0.3);
+
+    border-radius: 20px;
+
+    padding: 30px;
+
+    margin-top: 40px;
+
+    transition: 0.4s;
+}
+
+.card-demo:hover {
+
+    transform: translateY(-10px);
+
+    box-shadow:
+        0 0 20px rgba(0, 255, 255, 0.6);
+
+}
+
+
+/* ICONO */
+
+.icono-demo {
+    width: 80px;
+}
+
+
+/* BOTON DEMO */
+
+.boton-demo {
+
+    margin-top: 10px;
+
+    padding: 10px 25px;
+
+    border: none;
+
+    background: #00ffff;
+
+    color: black;
+
+    border-radius: 20px;
+
+    font-weight: bold;
+
+    transition: 0.3s;
+}
+
+.boton-demo:hover {
+
+    background: #00cccc;
+
+    transform: scale(1.05);
+}
+
+
+/* FOOTER */
+
+footer {
+
+    margin-top: auto;
+
+    background: #000;
+
+    border-top: 1px solid #00ffff;
+
+    padding: 25px 0;
+
+    font-size: 14px;
+
+}
