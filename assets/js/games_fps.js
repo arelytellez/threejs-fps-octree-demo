@@ -18,6 +18,15 @@ const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x88ccee);
 scene.fog = new THREE.Fog(0x88ccee, 0, 50);
 
+/*
+const testCube = new THREE.Mesh(
+    new THREE.BoxGeometry(1,1,1),
+    new THREE.MeshBasicMaterial({ color: 0xff0000 })
+);
+testCube.position.set(0, 1, -5);
+scene.add(testCube);*/
+
+
 const camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.1, 1000);
 camera.rotation.order = 'YXZ';
 
@@ -387,42 +396,59 @@ function controls(deltaTime) {
 
 const loader = new GLTFLoader().setPath('./models/gltf/');
 
-loader.load('collision-world.glb', (gltf) => {
+loader.load('scene.gltf', (gltf) => {
 
-    scene.add(gltf.scene);
+    console.log("MODELO CARGADO ✅");
 
-    worldOctree.fromGraphNode(gltf.scene);
+    const modelo = gltf.scene;
 
-    gltf.scene.traverse(child => {
+    // 🔍 MEDIR
+    const box = new THREE.Box3().setFromObject(modelo);
+    const size = box.getSize(new THREE.Vector3());
 
+    console.log("Tamaño del modelo:", size);
+
+    // 🎯 escalar correctamente
+let escala = 2 / size.y;
+escala *= 1.5;
+
+modelo.scale.setScalar(escala);
+
+    // 🎯 ESCALA REAL AUTOMÁTICA
+    //const escala = 2 / size.y;  
+    //modelo.scale.setScalar(escala);
+
+    // 📍 POSICIÓN
+    modelo.position.set(0, 0, 0);
+
+    scene.add(modelo);
+
+    // 🔥 COLISIONES
+    worldOctree.clear();
+    worldOctree.fromGraphNode(modelo);
+
+    // 👤 JUGADOR (altura realista)
+    playerCollider.start.set(0, 1, 0);
+    playerCollider.end.set(0, 2, 0);
+
+    modelo.traverse(child => {
         if (child.isMesh) {
-
             child.castShadow = true;
             child.receiveShadow = true;
 
             if (child.material.map) {
-
                 child.material.map.anisotropy = 4;
-
             }
-
         }
-
     });
 
-    const helper = new OctreeHelper(worldOctree);
-    helper.visible = false;
-    scene.add(helper);
-
-    const gui = new GUI({ width: 200 });
-    gui.add({ debug: false }, 'debug')
-        .onChange(function (value) {
-
-            helper.visible = value;
-
-        });
-
+}, undefined, (error) => {
+    console.error("ERROR AL CARGAR ❌", error);
 });
+
+
+
+
 
 function teleportPlayerIfOob() {
 
